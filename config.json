@@ -1,7 +1,7 @@
 {
     "telemetry": {
         "logging": {
-            "level": "trace"
+            "level": "debug"
         }
     },
     "blockchain": {
