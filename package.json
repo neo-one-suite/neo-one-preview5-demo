@@ -1,0 +1,19 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@neo-one/client": "^3.1.1-preview5",
+    "@neo-one/node-bin": "^3.1.1-preview5",
+    "@types/jest": "^26.0.14",
+    "jest": "^26.6.0",
+    "prettier": "^2.1.2",
+    "ts-jest": "^26.4.1",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.2"
+  },
+  "scripts": {
+    "run": "ts-node index.ts"
+  }
+}

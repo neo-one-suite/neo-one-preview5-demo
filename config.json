@@ -1,0 +1,51 @@
+{
+    "telemetry": {
+        "logging": {
+            "level": "trace"
+        }
+    },
+    "blockchain": {
+        "standbyValidators": [
+            "03009b7540e10f2562e5fd8fac9eaec25166a58b26e412348ff5a86927bfac22a2",
+            "023e9b32ea89b94d066e649b124fd50e396ee91369e8e2a6ae1b11c170d022256d",
+            "03408dcd416396f64783ac587ea1e1593c57d9fea880c8a6a1920e92a259477806",
+            "02a7834be9b32e2981d157cb5bbd3acb42cfd11ea5c3b10224d7a44e98c5910f1b",
+            "02ba2c70f5996f357a43198705859fae2cfea13e1172962800772b3d588a9d4abd",
+            "03daca45da7acf52602c630e58af4f45a894a427fa274544cadac5335a9a293d4e",
+            "02f889ecd43c5126ff1932d75fa87dea34fc95325fb724db93c8f79fe32cc3f180"
+        ],
+        "secondsPerBlock": 30,
+        "messageMagic": 894448462
+    },
+    "rpc": {
+        "http": {
+            "host": "0.0.0.0",
+            "port": 8080
+        },
+        "liveHealthCheck": {
+            "rpcURLs": [
+                "http://seed2t.neo.org:20332",
+                "http://seed4t.neo.org:20332"
+            ]
+        },
+        "readyHealthCheck": {
+            "rpcURLs": [
+                "http://seed2t.neo.org:20332",
+                "http://seed4t.neo.org:20332"
+            ],
+            "offset": 2
+        }
+    },
+    "node": {
+        "rpcURLs": [
+            "http://seed2t.neo.org:20332",
+            "http://seed4t.neo.org:20332"
+        ]
+    },
+    "network": {
+        "seeds": [
+            "http://seed2t.neo.org:20332",
+            "http://seed4t.neo.org:20332"
+        ]
+    }
+}
