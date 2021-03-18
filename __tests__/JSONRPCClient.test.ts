@@ -4,6 +4,7 @@ import { common } from '@neo-one/client-common';
 describe('JSONRPCClient Tests', () => {
   const client = new JSONRPCClient(new JSONRPCHTTPProvider('https://staging.neotracker.io/rpc'));
   const address = 'NSVX6sk3z14pSSjFx6WFEGajQXEbmahvwx';
+  const tx = '0x71f894214023d7f6592f9b57671d39ab4a01ba616e4e683a583b6e9d1670b6d2';
 
   test('getBlock', async () => {
     const block = await client.getBlock(1);
@@ -14,20 +15,22 @@ describe('JSONRPCClient Tests', () => {
     expect(block.tx).toEqual([]);
   });
 
-  test('getNep17Balances', async () => {
-    // Use another address with known balances
-    const balances = await client.getNep17Balances(address);
-
-    expect(balances.address).toEqual(address);
-    expect(balances.balance).toEqual([]);
-  });
-
   test('getNep17Transfers', async () => {
-    // Use another address with known transfers
-    const transfers = await client.getNep17Transfers(address);
+    // Use address with known transfers
+    const transfers = await client.getNep17Transfers(address, -1, 1616098466663);
 
     expect(transfers.address).toEqual(address);
-    expect(transfers.received).toEqual([]);
+    expect(transfers.received).toEqual([
+      {
+        amount: '234000000',
+        assethash: '0x70e2301955bf1e74cbb31d18c2f96972abadb328',
+        blockindex: 19913,
+        timestamp: 1612679900495,
+        transferaddress: 'NKuyBkoGdZZSLyPbJEetheRhMjeznFZszf',
+        transfernotifyindex: 0,
+        txhash: '0x71f894214023d7f6592f9b57671d39ab4a01ba616e4e683a583b6e9d1670b6d2',
+      },
+    ]);
     expect(transfers.sent).toEqual([]);
   });
 
@@ -52,15 +55,12 @@ describe('JSONRPCClient Tests', () => {
     expect((mempool as any).verified).toEqual([]);
   });
 
-  test.skip('getTransaction', async () => {
+  test('getTransaction', async () => {
     // Replace this with a valid transaction hash
-    const transactionHash = '0x173dcbc4a88995a0cf7bdd006923d148f787f76ca75621dc4c440ca6d9afbc73';
+    const transactionHash = tx;
     const transaction = await client.getTransaction(transactionHash);
 
-    expect(transaction.hash).toEqual(transactionHash);
-    expect((transaction as any).blockhash).toEqual(
-      '0x22b384a3a5d0c9dba641ca6c0a1e2d830342441cad6a77ad92f020858257058b',
-    );
+    expect(transaction.blockhash).toEqual('0xe71035f17ba11ccfe808f72fbbefad49c055e44f098c18acc1366e4bf05d6056');
   });
 
   test.skip('getStorage', async () => {
@@ -80,26 +80,25 @@ describe('JSONRPCClient Tests', () => {
     expect(storages).toEqual([]);
   });
 
-  test.skip('getTransactionReceipt', async () => {
+  test('getTransactionReceipt', async () => {
     // Replace this with a valid transaction hash
-    const transactionHash = '0x173dcbc4a88995a0cf7bdd006923d148f787f76ca75621dc4c440ca6d9afbc73';
+    const transactionHash = tx;
     const receipt = await client.getTransactionReceipt(transactionHash);
 
-    expect(receipt.blockHash).toEqual('0xc359030132be10fd19cfd0a27e289fe04acb0c5c4ca5254af8a2d99498c7da45');
-    expect(receipt.blockIndex).toEqual(0);
+    expect(receipt.blockHash).toEqual('0xe71035f17ba11ccfe808f72fbbefad49c055e44f098c18acc1366e4bf05d6056');
+    expect(receipt.blockIndex).toEqual(19913);
     expect(receipt.globalIndex).toEqual('-1');
-    expect(receipt.transactionHash).toEqual(transactionHash);
-    expect(receipt.confirmations).toBeGreaterThan(345557);
-    expect(receipt.blockTime).toEqual('1468595301000');
+    expect(receipt.confirmations).toBeGreaterThan(212962);
+    expect(receipt.blockTime).toEqual('1612679900495');
   });
 
-  test.skip('getTransactionHeight', async () => {
+  test('getTransactionHeight', async () => {
     const height = await client.getTransactionHeight(
       // Replace this with a valid transaction hash
-      '0x173dcbc4a88995a0cf7bdd006923d148f787f76ca75621dc4c440ca6d9afbc73',
+      tx,
     );
 
-    expect(height).toEqual(0);
+    expect(height).toEqual(19913);
   });
 
   test('getBlockHash', async () => {
